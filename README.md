@@ -11,16 +11,30 @@
   
   B.　Message의 구조는 다음과 같습니다.
   
-    a. opcode 
-      1. join (user)
-        ) + "|" +user_id(for db) 
-      2. create room
+    a. send opcode 
+      - 0 : join(self) , 1 : join(other people), 2 : disconnetion , 3 : create_room , 4 : send txt(message)
+      
+      0. join (self)
+        ) + "|" + online_users_count
+        
+      1. join(other people)  
+        ) + "|" + userid  this packet is sent from others
+      
+      2. disconnetion
+        ) + "|" + userid
+      
+      3. create room
         ) + "|" +user_id(me) + "|" + user_id(other person)
-      3. Sending Message 
+        
+      4. Sending Message 
         ) + "|" + room_id + "|" + room.userid(target) + "|" + txt
         
-    b. used
-      . program.cs -> chatHandle
+    b. recv opcode : 대부분 처리는 FE에서 전송 되어진다.
+      - 1 : join , 2 : create_room , 3 : send txt
+      
+    c. used
+      . SERVER_FORM.cs -> chatHandle
+      . SERVER_FORM.cs -> h_client_OnDisconnected
                
   C.　Message가 보내지는 상황
   
