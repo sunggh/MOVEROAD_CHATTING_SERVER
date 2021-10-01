@@ -18,7 +18,7 @@
         ) + "|" + online_users_count
         
       1. join(other people)  
-        ) + "|" + userid  this packet is sent from others
+        ) + "|" + userid  this packet is sent to others
       
       2. disconnetion
         ) + "|" + userid
